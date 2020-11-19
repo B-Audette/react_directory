@@ -3,6 +3,7 @@ import SearchForm from "./SearchForm";
 import ResultList from "./ResultList";
 import Hero from "./Hero"
 import API from "../utils/API";
+import "./style.css"
 
 class SearchResultContainer extends Component {
   state = {
@@ -47,12 +48,16 @@ class SearchResultContainer extends Component {
   };
 
   // responds to click on the first name to sort alphabetically
-  // BROKEN (prints console.log "sorted", but no functionality)
+  
   handleSort = event => {
     event.preventDefault();
     console.log("sort");
-    const sorted = this.state.filteredResults.sort((a,b) => {
-      return (a.sorted > b.sorted)
+    const sorted = this.state.filteredResults.sort((a, b) => {
+      if (a.name.first > b.name.first)
+      return 1;
+      else if (a.name.first < b.name.first)
+      return -1
+  
     })
     this.setState({filteredResults: sorted})
     };
@@ -61,18 +66,21 @@ class SearchResultContainer extends Component {
   render() {
     return (
       <div>
-         <Hero backgroundImage="https://wallpapercave.com/wp/wp6287241.jpg">
+         <Hero backgroundImage= "heroimage.jpg">
         <h1>Employee Database</h1>
         <h4>Search Employees</h4>
       </Hero>
-        <SearchForm
-          search={this.state.search}
-          handleFormSubmit={this.handleFormSubmit}
-          handleInputChange={this.handleInputChange}
-        />
-        <ResultList 
-        results={this.state.filteredResults} 
-        handleSort={this.handleSort}/>
+        <section>
+          <SearchForm
+            search={this.state.search}
+            handleFormSubmit={this.handleFormSubmit}
+            handleInputChange={this.handleInputChange}
+          />
+          <ResultList
+          results={this.state.filteredResults} 
+          handleSort={this.handleSort}/>
+        </section>
+        <Hero></Hero>
       </div>
     );
   }

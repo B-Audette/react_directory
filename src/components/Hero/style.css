@@ -1,9 +1,13 @@
 .hero {
+  background: url("heroimage.jpg");
   height: 200px;
   background-size: cover;
   background-position: center;
   position: relative;
+  
 }
+
+
 
 .hero::after {
   content: "";

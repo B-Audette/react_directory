@@ -5,10 +5,11 @@ function ResultList(props) {
     <table className="table table-striped">
   <thead>
     <tr>
-      <th scope="col" onClick={props.handleSort}>#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Profile Photo</th>
+      <th scope="col" onClick={props.handleSort}>Name</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Email</th>
+      <th scope="col">Location</th>
     </tr>
   </thead>
   <tbody>
@@ -16,12 +17,15 @@ function ResultList(props) {
        return  (
 
         <tr key={index}>
-          <td>{/* <img alt={result.title} className="img-fluid" src={result.images.original.url} /> */
-          result.name.first}
+          <td><img alt="picture" src={result.picture.thumbnail}/></td>
+          <td>{result.name.first} {result.name.last}
           </td>
-          <td>{result.name.last}</td>
-          {/* <td>{result.name.last}</td>
-          <td>{result.name.last}</td> */}
+          <td>{result.phone}
+          </td>
+          <td>{result.email}
+          </td>
+          <td>{result.location.city}
+          </td>
         </tr>
       )})}
       </tbody>
@@ -30,3 +34,6 @@ function ResultList(props) {
 }
 
 export default ResultList;
+
+/* <img alt={result.picture.thumbnail} </td>
+          className="img-fluid" src={result.images.original.url} /> */

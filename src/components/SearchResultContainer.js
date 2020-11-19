@@ -11,7 +11,7 @@ class SearchResultContainer extends Component {
     filteredResults: []
   };
 
-  // When this component mounts, display all employees???
+  // When this component mounts/page loads, populate with employees
   componentDidMount() {
     API.getEmployeeData()
     .then(res => {
@@ -23,21 +23,6 @@ class SearchResultContainer extends Component {
     .catch(err => console.log(err));
   }
 
-  // need a way to set each employee to a list item on the page
-
-
- // set up a click event to find one - needs more logic?
- /* getEmployeeData() {
-    API.getEmployeeData()
-    .then(res => {
-      console.log(res)
-      console.log(res.data.results)
-      this.setState({ results: res.data.results })
-    });
-  }*/
-  
-
-
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -47,21 +32,32 @@ class SearchResultContainer extends Component {
     });
   };
 
-  // When the form is submitted, search the employees to filter? for `this.state.search`?? re-sue the get employees call? what do here?
+  // When the form is submitted, the string in the input field becomes the filter criteria for the first/last name or the phone number
   handleFormSubmit = event => {
     event.preventDefault();
-    //this.getEmployeeData(this.state.search)
+  
     const filtered = this.state.allResults.filter(result => {
-      return result.name.first.includes(this.state.search)
+      return (result.name.first.includes(this.state.search) 
+      || (result.phone.includes(this.state.search))
+      || (result.name.last.includes(this.state.search))
+      )
     } )
 
     this.setState({filteredResults: filtered})
   };
+
+  // responds to click on the first name to sort alphabetically
+  // BROKEN (prints console.log "sorted", but no functionality)
   handleSort = event => {
     event.preventDefault();
     console.log("sort");
-  }
-
+    const sorted = this.state.filteredResults.sort((a,b) => {
+      return (a.sorted > b.sorted)
+    })
+    this.setState({filteredResults: sorted})
+    };
+  
+  // renders the page with components
   render() {
     return (
       <div>
@@ -74,7 +70,8 @@ class SearchResultContainer extends Component {
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
         />
-        <ResultList results={this.state.filteredResults} 
+        <ResultList 
+        results={this.state.filteredResults} 
         handleSort={this.handleSort}/>
       </div>
     );

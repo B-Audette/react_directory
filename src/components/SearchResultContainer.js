@@ -61,7 +61,7 @@ class SearchResultContainer extends Component {
   render() {
     return (
       <div>
-         <Hero backgroundImage="https://c1.wallpaperflare.com/preview/900/267/712/leaf-green-wall-pink.jpg">
+         <Hero backgroundImage="https://wallpapercave.com/wp/wp6287241.jpg">
         <h1>Employee Database</h1>
         <h4>Search Employees</h4>
       </Hero>

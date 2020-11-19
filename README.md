@@ -24,7 +24,7 @@ and
 
 ## Links
 
-[Deployment]coming soon
+[Deployment](https://pure-chamber-35371.herokuapp.com/)
 
 [Repository](https://github.com/B-Audette/react_directory)
 
